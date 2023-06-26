@@ -27,3 +27,46 @@ int Solution::solve(int V, vector<vector<int> > &B) {
     }
     return false;
 }
+
+
+
+
+//---------------------------------------------------------------------------
+Using bfs kahn algo(topological)
+
+vector<int> adj[A+1];
+vector<int> indegree(A+1, 0);
+queue<int> q;
+for(auto i : B){
+     adj[i[0]].push_back(i[1]);
+}
+
+for(int i = 1; i<=A; i++){
+
+     for(auto it : adj[i]){
+             indegree[it]++;
+    }
+}
+
+for(int i = 1; i<=A; i++){
+     if(indegree[i] == 0){
+     q.push(i);
+     }
+}
+
+int cnt = 0;
+while(!q.empty()){
+  int node = q.front();
+  cnt++;
+  q.pop();
+ for(auto it : adj[node]){
+  indegree[it]–;
+   if(indegree[it] == 0){
+     q.push(it);
+    }
+  }
+}
+
+if(cnt == A) return 0;
+return 1;
+}
