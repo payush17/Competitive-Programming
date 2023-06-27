@@ -6,6 +6,9 @@ int dfs(int node, int target, vector<int>& vis, vector<int> adj[]) {
     vis[node] = 1;
     int ans = 0;
     for (auto& it : adj[node]) {
+     //if (vis[it] == 0 and dfs(it, target, vis, adj)) {
+     //       return true;
+     //  }
         if (vis[it] == 0) {
             ans |= dfs(it, target, vis, adj);
         }
